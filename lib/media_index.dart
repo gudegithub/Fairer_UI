@@ -1,3 +1,4 @@
+import 'package:fairer_ui/side_menu.dart';
 import 'package:flutter/material.dart';
 import 'article.dart';
 
@@ -7,13 +8,8 @@ class MediaIndexPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.menu),
-            color: Colors.black38,
-            onPressed: () {},
-          )
-        ],
+        iconTheme: new IconThemeData(color: Colors.black38),
+        leading: Container(),
       ),
       bottomNavigationBar: Container(
         child: BottomNavigationBar(
@@ -34,18 +30,7 @@ class MediaIndexPage extends StatelessWidget {
           ],
         ),
       ),
-      endDrawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              child: ListTile(
-                
-              ),
-            ),
-            ListTile(),
-          ],
-        )
-      ),
+      endDrawer: SideDrawer(),
       body: ListView(
         children: <Widget>[
           MediaIndexMessage(),

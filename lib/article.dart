@@ -10,6 +10,7 @@ class ArticlePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.black38),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           color: Colors.black38,
@@ -17,13 +18,6 @@ class ArticlePage extends StatelessWidget {
             Navigator.of(context).pop(true);
           },
         ),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.menu),
-            color: Colors.black38,
-            onPressed: () {},
-          )
-        ],
       ),
       bottomNavigationBar: Container(
         child: BottomNavigationBar(
