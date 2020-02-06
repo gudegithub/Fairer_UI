@@ -1,54 +1,77 @@
-
-
+import 'package:fairer_ui/articlePage.dart';
 import 'package:flutter/material.dart';
 
-class ArticlePage extends StatelessWidget {
-  const ArticlePage({Key key}) : super(key: key);
+class Article extends StatelessWidget {
+  const Article({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black38),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          color: Colors.black38,
-          onPressed: () {
-            Navigator.of(context).pop(true);
-          },
-        ),
-      ),
-      bottomNavigationBar: Container(
-        child: BottomNavigationBar(
-          backgroundColor: Colors.white,
-          items: [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.access_time),
-              title: Text("時間割"),
+    return Container(
+      child: Container(
+        margin: EdgeInsets.only(top: 30.0),
+        child: Row(
+          children: <Widget>[
+            GestureDetector(
+              child: SizedBox(
+              width: 110,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset(
+                  'assets/image/thumbnail.png',
+                  fit: BoxFit.cover,
+                  )
+                ),
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => ArticlePage()),
+                );
+              },
             ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.calendar_today),
-              title: Text("カレンダー"),
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.description),
-              title: Text("メディア")
+            Flexible(
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    child: Row(
+                      children: <Widget>[
+                        Container(
+                          padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                          child: Image.asset(
+                            'assets/image/Column_budge.png',
+                            width: 75,
+                          )
+                        ),
+                        Text(
+                          "2019 8/20",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold
+                          )
+                        )
+                      ],
+                    ),
+                  ),
+                  GestureDetector(
+                    child: Container(
+                      padding: EdgeInsets.only(top: 10.0,left: 30.0, right: 30.0),
+                      child: Text(
+                        '【2020年度最新版】日本でeスポーツ認定されているゲーム一覧',
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                      )
+                    ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => ArticlePage()),
+                      );
+                    },
+                  )
+                ],
+              ),
             )
           ],
         ),
-      ),
-      endDrawer: Drawer(
-        child: ListView(
-          children: <Widget>[
-            DrawerHeader(
-              child: ListTile(
-                
-              ),
-            ),
-            ListTile(),
-          ],
-        )
       ),
     );
   }
