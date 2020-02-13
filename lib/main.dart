@@ -1,7 +1,7 @@
 
 import 'package:fairer_ui/root_page.dart';
 
-import 'auth/auth.dart';
+import 'service/auth.dart';
 import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());

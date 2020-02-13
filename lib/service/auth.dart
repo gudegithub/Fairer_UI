@@ -1,11 +1,12 @@
 import 'dart:async';
+import 'package:fairer_ui/models/user.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
 abstract class BaseAuth {
-	Future<String> signIn(String email, String password);
+	Future<User> signIn(String email, String password);
 
-	Future<String> signUp(String email, String password);
+	Future<User> signUp(String email, String password);
 
 	Future<FirebaseUser> currentUser();
 
@@ -15,27 +16,32 @@ abstract class BaseAuth {
 
 	Future<bool> isEmailVerified();
   
-  Future<String> signInWithGoogle();
+  Future<User> signInWithGoogle();
 
   Future<void> signOutGoogle();
 }
 
 class Auth implements BaseAuth {
+
 	final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
 
-	Future<String> signIn(String email, String password) async {
+  User _userFromFirebaseUser(FirebaseUser user) {
+    return user != null ? User(uid: user.uid) : null;
+  }
+
+	Future<User> signIn(String email, String password) async {
 		AuthResult result = await _firebaseAuth.signInWithEmailAndPassword(
 				email: email, password: password);
 		FirebaseUser user = result.user;
-		return user.uid;
+		return _userFromFirebaseUser(user);
 	}
 
-	Future<String> signUp(String email, String password) async {
+	Future<User> signUp(String email, String password) async {
 		AuthResult result = await _firebaseAuth.createUserWithEmailAndPassword(
 				email: email, password: password);
 		FirebaseUser user = result.user;
-		return user.uid;
+		return _userFromFirebaseUser(user);
 	}
 
 	Future<FirebaseUser> currentUser() async {
@@ -44,7 +50,13 @@ class Auth implements BaseAuth {
 	}
 
 	Future<void> signOut() async {
-		return _firebaseAuth.signOut();
+    try {
+      return _firebaseAuth.signOut();
+    } catch(e) {
+      print(e.toString());
+      return null;
+    }
+		
 	}
 
 	Future<void> emailVerification() async {
@@ -57,7 +69,7 @@ class Auth implements BaseAuth {
 		return user.isEmailVerified;
   }
 
-  Future<String> signInWithGoogle() async {
+  Future<User> signInWithGoogle() async {
     final GoogleSignInAccount googleSignInAccount = await googleSignIn.signIn();
     final GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount.authentication;
@@ -76,7 +88,7 @@ class Auth implements BaseAuth {
     final FirebaseUser currentUser = await _firebaseAuth.currentUser();
     assert(user.uid == currentUser.uid);
 
-    return 'signInWithGoogle succeeded: $user';
+    return _userFromFirebaseUser(user);
   }
 
   Future<void> signOutGoogle() async{
@@ -84,7 +96,6 @@ class Auth implements BaseAuth {
 
     print("User Sign Out");
   }
-
 
 }
 

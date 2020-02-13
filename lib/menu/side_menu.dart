@@ -1,19 +1,25 @@
 import 'package:fairer_ui/menu/side_pages/info.dart';
 import 'package:flutter/material.dart';
-import "../auth/auth.dart";
+import 'package:google_sign_in/google_sign_in.dart';
+import "../service/auth.dart";
 import 'package:url_launcher/url_launcher.dart';
 
-class SideDrawer extends StatefulWidget {
-  SideDrawer({this.auth,  this.logoutCallback});
+
+class SideDrawer extends StatelessWidget {
 
   final BaseAuth auth;
   final VoidCallback logoutCallback;
 
-  @override
-  _SideDrawerState createState() => _SideDrawerState();
-}
+  SideDrawer({this.auth, this.logoutCallback});
 
-class _SideDrawerState extends State<SideDrawer> {
+  signOut() async {
+    try {
+      await auth.signOut();
+      logoutCallback();
+    } catch(e) {
+      print(e);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,6 +59,7 @@ class _SideDrawerState extends State<SideDrawer> {
     );
   }
 
+
   Widget SideMenuList() {
     return Container(
       padding: EdgeInsets.only(left: 50.0),
@@ -62,10 +69,10 @@ class _SideDrawerState extends State<SideDrawer> {
             leading: Icon(Icons.school),
             title: Text("大学のリンク集"),
             onTap: () async {
-              showDialog(
-                context: context,
-                builder: (_) => linkDialog()
-              );
+              // showDialog(
+              //   context: context,
+              //   builder: (_) => linkDialog()
+              // );
             },
           ),
           ListTile(
@@ -92,9 +99,9 @@ class _SideDrawerState extends State<SideDrawer> {
           ListTile(
             leading: Icon(Icons.settings),
             title: Text("サインアウト"),
-            onTap: () {
-              widget.auth.signOut();
-            }
+            onTap: () async {
+              signOut();
+            },
           ),
           
         ],

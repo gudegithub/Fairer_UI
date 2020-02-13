@@ -1,5 +1,6 @@
+import 'package:fairer_ui/models/user.dart';
 import 'package:flutter/material.dart';
-import 'auth/auth.dart';
+import 'service/auth.dart';
 
 class LoginSignupPage extends StatefulWidget {
   LoginSignupPage({this.auth, this.loginCallback});
@@ -41,11 +42,11 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       String userId = "";
       try {
         if (_isLoginForm) {
-          userId = await widget.auth.signIn(_email, _password);
-          print('Signed in: $userId');
+          User user = await widget.auth.signIn(_email, _password);
+          print('Signed in: $user');
         } else {
-          userId = await widget.auth.signUp(_email, _password);
-          print('Signed up user: $userId');
+          User user = await widget.auth.signUp(_email, _password);
+          print('Signed up user: $user');
         }
         setState(() {
           _isLoading = false;
@@ -307,7 +308,9 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         shape: RoundedRectangleBorder(
           borderRadius: new BorderRadius.circular(10.0),
         ),
-        onPressed: () {},
+        onPressed: () {
+          googleSignIn();
+        },
       ),
     );
   }
