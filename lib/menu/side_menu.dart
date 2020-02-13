@@ -1,7 +1,19 @@
+import 'package:fairer_ui/menu/side_pages/info.dart';
 import 'package:flutter/material.dart';
+import "../auth/auth.dart";
+import 'package:url_launcher/url_launcher.dart';
 
-class SideDrawer extends StatelessWidget {
-  const SideDrawer({Key key}) : super(key: key);
+class SideDrawer extends StatefulWidget {
+  SideDrawer({this.auth,  this.logoutCallback});
+
+  final BaseAuth auth;
+  final VoidCallback logoutCallback;
+
+  @override
+  _SideDrawerState createState() => _SideDrawerState();
+}
+
+class _SideDrawerState extends State<SideDrawer> {
 
   @override
   Widget build(BuildContext context) {
@@ -14,13 +26,8 @@ class SideDrawer extends StatelessWidget {
       )
     );
   }
-}
 
-class SideMenuHeader extends StatelessWidget {
-  const SideMenuHeader({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget SideMenuHeader() {
     return DrawerHeader(
       child: Container(
         padding: EdgeInsets.only(top: 40, left: 30),
@@ -45,14 +52,8 @@ class SideMenuHeader extends StatelessWidget {
       )
     );
   }
-}
 
-class SideMenuList extends StatelessWidget {
-  String iconName;
-  String title;
-
-  @override
-  Widget build(BuildContext context) {
+  Widget SideMenuList() {
     return Container(
       padding: EdgeInsets.only(left: 50.0),
       child: Column(
@@ -60,8 +61,11 @@ class SideMenuList extends StatelessWidget {
           ListTile(
             leading: Icon(Icons.school),
             title: Text("大学のリンク集"),
-            onTap: () {
-
+            onTap: () async {
+              showDialog(
+                context: context,
+                builder: (_) => linkDialog()
+              );
             },
           ),
           ListTile(
@@ -75,7 +79,7 @@ class SideMenuList extends StatelessWidget {
             leading: Icon(Icons.info),
             title: Text("情報"),
             onTap: () {
-
+              
             },
           ),
           ListTile(
@@ -84,9 +88,34 @@ class SideMenuList extends StatelessWidget {
             onTap: () {
 
             },
-          )
+          ),
+          ListTile(
+            leading: Icon(Icons.settings),
+            title: Text("サインアウト"),
+            onTap: () {
+              widget.auth.signOut();
+            }
+          ),
+          
         ],
       ),
     );
   }
+
+  Widget linkDialog() {
+    return SimpleDialog(
+      title: Text("各リンク"),
+      children: <Widget>[
+        SimpleDialogOption(
+          onPressed: () {
+            
+          },
+        ),
+        SimpleDialogOption(),
+        SimpleDialogOption(),
+        SimpleDialogOption(),
+      ],
+    );
+  }
 }
+

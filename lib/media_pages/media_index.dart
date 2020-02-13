@@ -1,8 +1,7 @@
-import 'package:fairer_ui/article.dart';
-import 'package:fairer_ui/navigation_bar.dart';
-import 'package:fairer_ui/side_menu.dart';
+import 'package:fairer_ui/menu/navigation_bar.dart';
+import 'package:fairer_ui/menu/side_menu.dart';
 import 'package:flutter/material.dart';
-import 'articlePage.dart';
+import 'article.dart';
 
 class MediaIndexPage extends StatelessWidget {
   @override

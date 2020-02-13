@@ -1,4 +1,4 @@
-import 'package:fairer_ui/articlePage.dart';
+import 'articlePage.dart';
 import 'package:flutter/material.dart';
 
 class Article extends StatelessWidget {

@@ -1,10 +1,10 @@
 
 
-import 'package:fairer_ui/article.dart';
-import 'package:fairer_ui/navigation_bar.dart';
+import 'article.dart';
+import 'package:fairer_ui/menu/navigation_bar.dart';
 import 'package:flutter/material.dart';
 
-import 'side_menu.dart';
+import '../menu/side_menu.dart';
 
 class ArticlePage extends StatelessWidget {
   const ArticlePage({Key key}) : super(key: key);

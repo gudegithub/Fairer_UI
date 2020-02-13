@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "556394536906",
+    "firebase_url": "https://fairer-171bb.firebaseio.com",
+    "project_id": "fairer-171bb",
+    "storage_bucket": "fairer-171bb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:556394536906:android:6060a5eaa9d1c0bd95b933",
+        "android_client_info": {
+          "package_name": "com.android.application"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "556394536906-tev35d2s2alvqo0iemllus28f9aodqd2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBDTAH7QNajp_RYl6LSh8etOI5F7mwj2vQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "556394536906-tev35d2s2alvqo0iemllus28f9aodqd2.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "556394536906-2c1paarlsk0757r3ovnh3ejdpb0s96qd.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.fairer"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
