@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class DatabaseService {
   
   final String uid;
-  DatabaseService({this.uid});
+  DatabaseService({ this.uid,this.university, this.week, this.time});
 
   // ユーザープロフィール取得
 
@@ -39,11 +39,16 @@ class DatabaseService {
 
   // 時間割情報取得
 
+  final String university;
+  final int week;
+  final int time;
+
   final CollectionReference classDataCollection = Firestore.instance.collection('classData');
 
   List<FirebaseClassData> _classDataListFromSnapshot(QuerySnapshot snapshot) {
     return snapshot.documents.map((doc) {
       return FirebaseClassData(
+        id: doc.documentID,
         university: doc.data["university"],
         week: doc.data["week"],
         time: doc.data["time"],
@@ -58,7 +63,6 @@ class DatabaseService {
   Future<String> createClassData(String university, String className, int week, int time, String teacherName, String room, String classCode) async {
 
     final classData = classDataCollection.document();
-
     classData.setData({
       'university': university,
       'className': className,
@@ -73,6 +77,7 @@ class DatabaseService {
 
   Future<void> updateClassData(String id,String className, int week, int time, String teacherName, String room, String classCode) async {
     return await classDataCollection.document(id).setData({
+      'university': university,
       'className': className,
       'week': week,
       'time': time,
@@ -82,33 +87,16 @@ class DatabaseService {
     });
   }
 
-  Stream<List<FirebaseClassData>> get classData {
-    return classDataCollection.snapshots()
+  Stream<List<FirebaseClassData>> get getClassData {
+    final  classCollection = classDataCollection
+      .where("university", isEqualTo: university)
+      .where("week", isEqualTo: week)
+      .where("time", isEqualTo: time)
+      .snapshots()
       .map(_classDataListFromSnapshot);
+    
+    return classCollection;
+
   }
 
-  searchClassData(int week, int time, String university) {
-    int week;
-    int time;
-    String university;
-
-    return classDataCollection
-        .where("university", isEqualTo: university)
-        .where("week", isEqualTo: week)
-        .where("time", isEqualTo: time)
-        .snapshots()
-      ?? "no result"; 
-  }
-
-
-  Future getUserProfile (String documentId) async {
-    DocumentSnapshot docSnapshot =
-        await userProfileCollection.document(documentId).get();
-    return UserProfile(
-      uid: docSnapshot.data["uid"],
-      name: docSnapshot.data["name"],
-      university: docSnapshot.data["university"],
-      department: docSnapshot.data["department"],
-    );
-  }
 }

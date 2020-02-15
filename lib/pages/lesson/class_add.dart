@@ -230,7 +230,6 @@ class _ClassAddState extends State<ClassAdd> {
                         _formKey.currentState.save();
 
                         final id = await DatabaseService().createClassData(
-                          // userProfile.university,
                           widget.university,
                           _class,
                           widget.numberWeek,

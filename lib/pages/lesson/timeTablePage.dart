@@ -27,7 +27,7 @@ class _TableState extends State<Table> with RouteAware{
       path.join(await getDatabasesPath(), 'ajj.db'),
       onCreate: (db, version) {
         return db.execute(
-            " CREATE TABLE classdata (id INTEGER PRIMARY KEY, week INTEGER,time INTEGER,className TEXT,teacherName TEXT,roomName TEXT,classCode TEXT,attendance INTEGER,absence INTEGER,late INTEGER,color TEXT) ",
+            " CREATE TABLE classdata (id String PRIMARY KEY, week INTEGER,time INTEGER,className TEXT,teacherName TEXT,roomName TEXT,classCode TEXT,attendance INTEGER,absence INTEGER,late INTEGER,color TEXT) ",
         );
       },
       version: 1,

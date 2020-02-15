@@ -41,6 +41,6 @@ class _ClassPageState extends State<ClassePage>{
     if(widget.index==1)
       return ClassRegister(numberClass: widget.numberClass, numberWeek:widget.numberWeek, university: widget.university);
     else
-      return ClassDetailDate(data: widget.data,);
+      return ClassDetailDate(data: widget.data, university: widget.university);
   }
 }

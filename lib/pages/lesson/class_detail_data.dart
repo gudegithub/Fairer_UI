@@ -8,8 +8,9 @@ import 'class_change_data.dart';
 import 'package:sqflite/sqflite.dart' as sqlite;
 class ClassDetailDate extends StatefulWidget {
   ClassData data;
+  final String university;
 
-  ClassDetailDate({this.data});
+  ClassDetailDate({this.data, this.university});
 
   _ClassDetailDateState createState() => _ClassDetailDateState();
 }
@@ -309,12 +310,15 @@ class _ClassDetailDateState extends State<ClassDetailDate> {
                   onTap: () async{
                     final result = await Navigator.of(context).push(
                         MaterialPageRoute(
-                            builder: (context) =>
-                                ClassChange(
-                                    numberClass:
-                                    widget.data.time,
-                                    numberWeek: widget.data.week,
-                                beforeclassData: widget.data,)));
+                          builder: (context) =>
+                              ClassChange(
+                                university: widget.university,
+                                numberClass:widget.data.time,
+                                numberWeek: widget.data.week,
+                                beforeclassData: widget.data,
+                              )
+                            )
+                          );
                     if(result!=null){
                       Navigator.of(context).pop(result);
                     }

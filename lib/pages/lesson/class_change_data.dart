@@ -10,11 +10,13 @@ import 'class_data.dart';
 class ClassChange extends StatefulWidget {
   int numberClass;
   int numberWeek;
+  String university;
   ClassData beforeclassData;
   ClassChange({
     @required this.beforeclassData,
     @required this.numberClass,
     @required this.numberWeek,
+    @required this.university
   })  : //assert(numberClass != null),
         //assert(numberWeek != null),
   assert(beforeclassData!=null);
@@ -284,7 +286,7 @@ class _ClassChangeState extends State<ClassChange> {
                             attendance: 0);
                         Insertclassdata(classdata);
 
-                        await DatabaseService().updateClassData(
+                        await DatabaseService(university: widget.university).updateClassData(
                           widget.beforeclassData.id,     
                           _class,
                           widget.numberWeek,
