@@ -1,7 +1,9 @@
-import 'package:fairer_ui/media_pages/media_index.dart';
+
+import 'package:fairer_ui/pages/home.dart';
+import 'package:fairer_ui/pages/media_pages/media_index.dart';
 import 'package:flutter/material.dart';
 import 'login_signup_page.dart';
-import 'service/auth.dart';
+import '../service/auth.dart';
 
 
 enum AuthStatus {
@@ -78,7 +80,7 @@ class _RootPageState extends State<RootPage> {
         break;
       case AuthStatus.LOGGED_IN:
         if (_userId.length > 0 && _userId != null) {
-          return new MediaIndex(
+          return new HomePage(
             userId: _userId,
             auth: widget.auth,
             logoutCallback: logoutCallback,

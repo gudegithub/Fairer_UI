@@ -5,37 +5,18 @@ import 'package:flutter/material.dart';
 import 'article.dart';
 
 
-class MediaIndex extends StatefulWidget {
-  
-  MediaIndex({Key key, this.userId, this.auth, this.logoutCallback}) : super(key: key);
 
-  final String userId;
-  final BaseAuth auth;
-  final VoidCallback logoutCallback;
 
-  @override
-  _MediaIndexState createState() => new _MediaIndexState();
-}
-
-class _MediaIndexState extends State<MediaIndex> {
+class MediaIndexPage extends StatelessWidget {
   @override
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: new IconThemeData(color: Colors.black38),
-        leading: Container(),
-      ),
-      bottomNavigationBar: NavigationBar(),
-      endDrawer: SideDrawer(auth: widget.auth, logoutCallback: widget.logoutCallback,),
-      body: ListView(
-        children: <Widget>[
-          MediaIndexMessage(),
-          Category(),
-          ArticleList(),
-        ],
-      )
+    return ListView(
+      children: <Widget>[
+        MediaIndexMessage(),
+        Category(),
+        ArticleList(),
+      ],
     );
   }
 

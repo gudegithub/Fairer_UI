@@ -1,7 +1,6 @@
-import 'package:fairer_ui/models/user.dart';
-import 'package:flutter/material.dart';
-import 'service/auth.dart';
 
+import 'package:fairer_ui/service/auth.dart';
+import 'package:flutter/material.dart';
 class LoginSignupPage extends StatefulWidget {
   LoginSignupPage({this.auth, this.loginCallback});
 
@@ -42,10 +41,10 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
       String userId = "";
       try {
         if (_isLoginForm) {
-          User user = await widget.auth.signIn(_email, _password);
+          String user = await widget.auth.signIn(_email, _password);
           print('Signed in: $user');
         } else {
-          User user = await widget.auth.signUp(_email, _password);
+          String user = await widget.auth.signUp(_email, _password);
           print('Signed up user: $user');
         }
         setState(() {

@@ -1,9 +1,8 @@
-import 'package:fairer_ui/menu/side_pages/info.dart';
+import 'package:fairer_ui/models/user.dart';
+import 'package:fairer_ui/service/database.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
+import 'package:provider/provider.dart';
 import "../service/auth.dart";
-import 'package:url_launcher/url_launcher.dart';
-
 
 class SideDrawer extends StatelessWidget {
 
@@ -11,6 +10,7 @@ class SideDrawer extends StatelessWidget {
   final VoidCallback logoutCallback;
 
   SideDrawer({this.auth, this.logoutCallback});
+  
 
   signOut() async {
     try {
@@ -23,39 +23,15 @@ class SideDrawer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Drawer(
-      child: ListView(
-        children: <Widget>[
-          SideMenuHeader(),
-          SideMenuList(),
-        ],
-      )
-    );
-  }
 
-  Widget SideMenuHeader() {
-    return DrawerHeader(
-      child: Container(
-        padding: EdgeInsets.only(top: 40, left: 30),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
+
+    return  Drawer(
+        child: ListView(
           children: <Widget>[
-            Image.asset(
-              'assets/image/sample_icon.png',
-              height: 60,
-            ),
-            Container(
-              padding: EdgeInsets.only(top: 10, left: 20),
-              child: Column(
-                children: <Widget>[
-                  Text("山田　太郎"),
-                  Text("同志社大学　経済学部")
-                ],
-              )
-            )
+            SideMenuHeader(),
+            SideMenuList(),
           ],
-        ),
-      )
+        )
     );
   }
 
@@ -122,6 +98,39 @@ class SideDrawer extends StatelessWidget {
         SimpleDialogOption(),
         SimpleDialogOption(),
       ],
+    );
+  }
+}
+
+class SideMenuHeader extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    @override
+
+    final UserProfile userProfile = Provider.of<UserProfile>(context);
+    return DrawerHeader(
+      child: Container(
+        padding: EdgeInsets.only(top: 40, left: 30),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: <Widget>[
+            Image.asset(
+              'assets/image/sample_icon.png',
+              height: 60,
+            ),
+            Container(
+              padding: EdgeInsets.only(top: 10, left: 20),
+              child: Column(
+                children: <Widget>[
+                  Text("${userProfile.name}"),
+                  Text("${userProfile.university}　${userProfile.department}"),
+                ],
+              )
+            )
+          ],
+        ),
+      )
     );
   }
 }
