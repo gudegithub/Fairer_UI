@@ -27,9 +27,12 @@ class _HomePageState extends State<HomePage> {
     final user = Provider.of<User>(context);
     int _selectedPage = 0;
     final _pageOptions = [
-      prefix0.Table(),
+      prefix0.Table(uid: user.uid),
       MediaIndexPage(),
     ];
+
+
+
 
     return StreamProvider<UserProfile>.value(
       value: DatabaseService(uid: user.uid).userData,
@@ -52,7 +55,6 @@ class _HomePageState extends State<HomePage> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.description),
                 title: Text("メディア"),
-                
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.access_time),

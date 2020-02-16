@@ -1,5 +1,7 @@
 //時間割ページ
 import 'package:fairer_ui/models/user.dart';
+import 'package:fairer_ui/pages/profile.dart';
+import 'package:fairer_ui/service/auth.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'classPage.dart';
@@ -12,14 +14,14 @@ class Table extends StatefulWidget {
   //デフォ 5限の金曜日まで
   final int numberClass = 5; //5限の場合5
   final int numberWeek = 6; //土曜日なし5(月～金)土曜あり6(月～土)
-  Table({Key key}):super(key:key);
+  final String uid;
+  Table({this.uid});
 
   _TableState createState() => _TableState();
 }
 class _TableState extends State<Table> with RouteAware{
   Map<String,ClassData> map;
   @override
-
 
   int count=0;
   void operate()async {
@@ -121,7 +123,6 @@ class _TableState extends State<Table> with RouteAware{
   Widget Body() {
 
     final userProfile = Provider.of<UserProfile>(context);
-    
 
     var baseWeeks;
     var baseTime;
@@ -185,6 +186,37 @@ class _TableState extends State<Table> with RouteAware{
           _textItem("8")
         ];
         break;
+    }
+
+    Widget message() {
+      if (userProfile == null) {
+        return Container(
+          padding: EdgeInsets.only(top: 20, bottom: 20),
+          child: Column(
+            children: <Widget>[
+              Text("大学を設定してください"),
+              RaisedButton(
+                child: Text("Button"),
+                color: Colors.blue,
+                shape: StadiumBorder(),
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => 
+                      Profile(
+                        uid: widget.uid,
+                        isSignupForm: false,
+                      )
+                    ),
+                  );
+                },
+              )
+            ],
+          ),
+        );
+      } else {
+        return Container();
+      }
     }
 
     return Container(
@@ -400,7 +432,8 @@ class _TableState extends State<Table> with RouteAware{
                 ),
               ],
             ),
-          )
+          ),
+          message(),
         ],
       )
     );

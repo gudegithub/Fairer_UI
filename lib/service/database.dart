@@ -18,16 +18,14 @@ class DatabaseService {
       name: snapshot.data["name"],
       university: snapshot.data["university"],
       department: snapshot.data["department"],
-      graduationYear: snapshot.data["graduationYear"]
     );
   }
 
-  Future<void> updateUserProfile(String name, String university, String department, String graduationYear) async {
+  Future<void> updateUserProfile(String name, String university, String department) async {
     return await userProfileCollection.document(uid).setData({
       'name': name,
       'university' : university,
       'department' : department,
-      'graduationYear' : graduationYear
     });
   }
 
@@ -98,5 +96,7 @@ class DatabaseService {
     return classCollection;
 
   }
+
+  // 検索用のリストを取得
 
 }

@@ -1,4 +1,5 @@
 import 'package:fairer_ui/models/user.dart';
+import 'package:fairer_ui/pages/profile.dart';
 import 'package:fairer_ui/service/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,66 +25,72 @@ class SideDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
+    final UserProfile userProfile = Provider.of<UserProfile>(context);
 
     return  Drawer(
         child: ListView(
           children: <Widget>[
-            SideMenuHeader(),
-            SideMenuList(),
+            SideMenuHeader(userProfile: userProfile),
+            Container(
+              padding: EdgeInsets.only(left: 50.0),
+              child: Column(
+                children: <Widget>[
+                  ListTile(
+                    leading: Icon(Icons.school),
+                    title: Text("大学のリンク集"),
+                    onTap: () async {
+  
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.help_outline),
+                    title: Text("ヘルプ"),
+                    onTap: () {
+
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.info),
+                    title: Text("情報"),
+                    onTap: () {
+                      
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text("設定"),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => 
+                          Profile(
+                            uid: userProfile.uid,
+                            isSignupForm: false,
+                            name: userProfile.name,
+                            university: userProfile.university,
+                            department: userProfile.department,
+                          )
+                        ),
+                      );
+                    },
+                  ),
+                  ListTile(
+                    leading: Icon(Icons.settings),
+                    title: Text("サインアウト"),
+                    onTap: () async {
+                      signOut();
+                    },
+                  ),
+                  
+                ],
+              ),
+            ),
           ],
         )
     );
   }
 
 
-  Widget SideMenuList() {
-    return Container(
-      padding: EdgeInsets.only(left: 50.0),
-      child: Column(
-        children: <Widget>[
-          ListTile(
-            leading: Icon(Icons.school),
-            title: Text("大学のリンク集"),
-            onTap: () async {
-              // showDialog(
-              //   context: context,
-              //   builder: (_) => linkDialog()
-              // );
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.help_outline),
-            title: Text("ヘルプ"),
-            onTap: () {
-
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.info),
-            title: Text("情報"),
-            onTap: () {
-              
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text("設定"),
-            onTap: () {
-
-            },
-          ),
-          ListTile(
-            leading: Icon(Icons.settings),
-            title: Text("サインアウト"),
-            onTap: () async {
-              signOut();
-            },
-          ),
-          
-        ],
-      ),
-    );
-  }
 
   Widget linkDialog() {
     return SimpleDialog(
@@ -104,11 +111,13 @@ class SideDrawer extends StatelessWidget {
 
 class SideMenuHeader extends StatelessWidget {
 
+  final UserProfile userProfile;
+
+  SideMenuHeader({this.userProfile});
+
   @override
   Widget build(BuildContext context) {
-    @override
 
-    final UserProfile userProfile = Provider.of<UserProfile>(context);
     return DrawerHeader(
       child: Container(
         padding: EdgeInsets.only(top: 40, left: 30),
@@ -119,14 +128,17 @@ class SideMenuHeader extends StatelessWidget {
               'assets/image/sample_icon.png',
               height: 60,
             ),
-            Container(
-              padding: EdgeInsets.only(top: 10, left: 20),
-              child: Column(
-                children: <Widget>[
-                  Text("${userProfile.name}"),
-                  Text("${userProfile.university}　${userProfile.department}"),
-                ],
-              )
+            Flexible(
+              child: Container(
+                padding: EdgeInsets.only(top: 10, left: 20),
+                child: Column(
+                  children: <Widget>[
+                    Text("${userProfile.name}"),
+                    Text("${userProfile.university}"),
+                    Text("${userProfile.department}")
+                  ],
+                )
+              ),
             )
           ],
         ),

@@ -1,6 +1,24 @@
+import 'package:fairer_ui/service/database.dart';
 import 'package:flutter/material.dart';
 
 class Profile extends StatefulWidget {
+
+  final String uid;
+  final String name;
+  final String university;
+  final String department;
+  final VoidCallback loginCallback;
+  final bool isSignupForm;
+
+  Profile({
+    @required this.uid,  
+    @required this.isSignupForm,
+    this.loginCallback,
+    this.name,
+    this.university,
+    this.department,
+  });
+
   @override
   _ProfileState createState() {
     return _ProfileState();
@@ -24,6 +42,18 @@ class _ProfileState extends State<Profile> {
 
   @override
   Widget build(BuildContext context) {
+
+    if (!widget.isSignupForm) {
+      initState(){
+        _name = widget.name;
+        _currentlySelected = widget.university;
+        _selectedGakubu = widget.department;
+      }
+    }
+
+    final userNameInputController = new TextEditingController();
+    userNameInputController.text = _name;
+
     return new Scaffold(
       appBar: new AppBar(
         backgroundColor: Colors.white,
@@ -42,7 +72,7 @@ class _ProfileState extends State<Profile> {
                 child: Column(
                   children: <Widget>[
                     Container(
-                      child: Image.asset('images/profile.png'),
+                      child: Image.asset('assets/image/profile.png'),
                       margin: EdgeInsets.only(top: 70),
                     ),
                     Container(
@@ -56,10 +86,12 @@ class _ProfileState extends State<Profile> {
                         style: TextStyle(color: Colors.black, fontSize: 20),
                         obscureText: false,
                         maxLines: 1,
+                        controller: userNameInputController,
                         decoration: const InputDecoration(
                           hintText: 'お名前を教えてください',
-                          labelText: 'ニックネーム',
+                          labelText: "ニックネーム",
                         ),
+                        validator: (value) => value.isEmpty ? 'ニックネームを入力してください' : null,
                         onChanged: (value) {
                           //once dropdown changes, update the state of out currentValue
                           setState(() {
@@ -87,7 +119,7 @@ class _ProfileState extends State<Profile> {
                         children: <Widget>[
                           Container(
                             child: DropdownButton(
-                              hint: Text("大学"),
+                              hint: widget.isSignupForm ? Text("大学") : Text("${widget.university}"),
 
                               //map each value from the lIst to our dropdownMenuItem widget
                               items: _dropdownValues.map((value) {
@@ -97,7 +129,6 @@ class _ProfileState extends State<Profile> {
                                 );
                               }).toList(),
                               value: _currentlySelected,
-
                               onChanged: (value) {
                                 //once dropdown changes, update the state of out currentValue
                                 setState(() {
@@ -131,7 +162,7 @@ class _ProfileState extends State<Profile> {
                                   value: value,
                                 );
                               }).toList(),
-                              hint: Text("学部"),
+                              hint: widget.isSignupForm ? Text("学部") : Text("${widget.department}"),
                               value: _selectedGakubu,
                               onChanged: (String value) {
                                 //once dropdown changes, update the state of out currentValue
@@ -164,11 +195,14 @@ class _ProfileState extends State<Profile> {
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               onPressed: () {
-                if (_formKey.currentState.validate()) {
-                  print(_name);
-                  print(_currentlySelected);
-                  print(_selectedGakubu);
-                }
+                if (_formKey.currentState.validate() && _currentlySelected != null && _selectedGakubu != null) {
+                  DatabaseService(uid: widget.uid).updateUserProfile(_name, _currentlySelected, _selectedGakubu);
+                  if (widget.isSignupForm) {
+                    widget.loginCallback();
+                  } else {
+                    Navigator.pop(context);
+                  }
+                } 
               },
             ),
           ),

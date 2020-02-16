@@ -61,6 +61,7 @@ flutter:
    - assets/image/thumbnail.png
    - assets/image/Column_budge.png
    - assets/image/sample_icon.png
+   - assets/image/profile.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

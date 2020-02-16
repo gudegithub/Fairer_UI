@@ -1,11 +1,13 @@
 
+import 'package:fairer_ui/pages/profile.dart';
 import 'package:fairer_ui/service/auth.dart';
 import 'package:flutter/material.dart';
 class LoginSignupPage extends StatefulWidget {
-  LoginSignupPage({this.auth, this.loginCallback});
+  LoginSignupPage({this.auth, this.loginCallback, this.signupCallback});
 
   final BaseAuth auth;
   final VoidCallback loginCallback;
+  final VoidCallback signupCallback;
 
   @override
   State<StatefulWidget> createState() => new _LoginSignupPageState();
@@ -43,16 +45,20 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
         if (_isLoginForm) {
           String user = await widget.auth.signIn(_email, _password);
           print('Signed in: $user');
+          userId = user;
         } else {
           String user = await widget.auth.signUp(_email, _password);
           print('Signed up user: $user');
+          userId = user;
         }
         setState(() {
           _isLoading = false;
         });
-
         if (userId.length > 0 && userId != null && _isLoginForm) {
           widget.loginCallback();
+        }
+        if (userId.length > 0 && userId != null && !_isLoginForm) {
+          widget.signupCallback();
         }
       } catch (e) {
         print('Error: $e');
@@ -65,15 +71,27 @@ class _LoginSignupPageState extends State<LoginSignupPage> {
     }
   }
 
-  void googleSignIn() {
+  void googleSignIn() async {
     setState(() {
       _errorMessage = "";
       _isLoading = true;
     });
     try {
-      widget.auth.signInWithGoogle();
+      String userId = await widget.auth.signInWithGoogle();
+      if (userId.length > 0 && userId != null && _isLoginForm) {
+        widget.loginCallback();
+      }
+      if (userId.length > 0 && userId != null && !_isLoginForm) {
+        print(userId);
+        widget.signupCallback();
+      }
     } catch (e) {
       print("error: $e");
+      setState(() {
+        _isLoading = false;
+        _errorMessage = e.message;
+        _formKey.currentState.reset();
+      });
     }
   }
 
