@@ -123,7 +123,8 @@ class DatabaseService {
         id: doc.documentID,
         title: doc.data["title"],
         content: doc.data["content"],
-        classId: doc.data["classId"]
+        classId: doc.data["classId"],
+        timestamp: doc.data["timestamp"]
       );
     }).toList();
   }

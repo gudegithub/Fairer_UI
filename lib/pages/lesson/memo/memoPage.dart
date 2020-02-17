@@ -86,7 +86,7 @@ class _MemoPageState extends State<MemoPage> {
             );
           }
         ),
-        body: MemoList(),
+        body: MemoList(color: _color),
       ),
     );
   }

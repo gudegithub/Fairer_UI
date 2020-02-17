@@ -96,25 +96,24 @@ class _MemoAddPageState extends State<MemoAddPage> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
-                  TextFormField(
-                    decoration: InputDecoration(
-                      hintText: "タイトル"
+                  Container(
+                    margin: EdgeInsets.only(bottom: 20),
+                    child: TextFormField(
+                      decoration: TextInputDecoration.copyWith(hintText: "タイトル"),
+                      enabled: true,
+                      validator: (val) => val.isEmpty ? "タイトルを入力してください" : null,
+                      onChanged: (String value) {
+                        setState(() {
+                          title = value;
+                        });
+                      },
                     ),
-                    enabled: true,
-                    validator: (val) => val.isEmpty ? "タイトルを入力してください" : null,
-                    onChanged: (String value) {
-                      setState(() {
-                        title = value;
-                      });
-                    },
                   ),
                   ConstrainedBox(
-                    constraints: BoxConstraints(maxHeight: 200),
+                    constraints: BoxConstraints(maxHeight: 250),
                     child: TextFormField(
-                      decoration: InputDecoration(
-                        hintText: "メモ"
-                      ),
-                      maxLines: 20,
+                      decoration: TextInputDecoration.copyWith(hintText: "メモ"),
+                      maxLines: 40,
                       minLines: 1,
                       validator: (val) => val.isEmpty ? "メモを入力してください" : null,
                       onChanged: (String value) {
@@ -124,18 +123,27 @@ class _MemoAddPageState extends State<MemoAddPage> {
                       },
                     ),
                   ),
-                  RaisedButton(
-                    child: Text("Button"),
-                    color: Colors.blue,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: new BorderRadius.circular(10.0),
+                  Container(
+                    margin: EdgeInsets.only(top: 30),
+                    child: RaisedButton(
+                      child: Text(
+                        "保存",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold
+                        ),
+                      ),
+                      color: Colors.blue,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: new BorderRadius.circular(10.0),
+                      ),
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
+                          DatabaseService(uid: widget.data.id).createMemo(title, content);
+                          Navigator.of(context).pop(data);
+                        }
+                      },
                     ),
-                    onPressed: () {
-                      if (_formKey.currentState.validate()) {
-                        DatabaseService(uid: widget.data.id).createMemo(title, content);
-                        Navigator.of(context).pop(data);
-                      }
-                    },
                   ),
                 ],
               ),
@@ -145,5 +153,17 @@ class _MemoAddPageState extends State<MemoAddPage> {
       )
     );
   }
+
+  final TextInputDecoration = InputDecoration(
+    fillColor: Colors.white,
+    filled: true,
+    contentPadding: EdgeInsets.all(12.0),
+    enabledBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.white, width: 2.0),
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.pink, width: 2.0),
+    ),
+  );
 }
 
