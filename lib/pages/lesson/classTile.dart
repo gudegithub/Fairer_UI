@@ -4,16 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart' as sqlite;
 import 'package:path/path.dart' as path;
 
-class classTile extends StatefulWidget {
+class ClassTile extends StatefulWidget {
   
   final FirebaseClassData lesson;
-  classTile({this.lesson});
+  ClassTile({this.lesson});
 
   @override
-  _classTileState createState() => _classTileState();
+  _ClassTileState createState() => _ClassTileState();
 }
 
-class _classTileState extends State<classTile> {
+class _ClassTileState extends State<ClassTile> {
 
     Future<sqlite.Database> database;
       void initState(){

@@ -7,7 +7,7 @@ import 'package:fairer_ui/models/user.dart';
 class DatabaseService {
   
   final String uid;
-  DatabaseService({ this.uid,this.university, this.week, this.time});
+  DatabaseService({ this.uid,this.university, this.week, this.time, this.classId});
 
   // ユーザープロフィール取得
 
@@ -104,17 +104,34 @@ class DatabaseService {
 
   // Memo機能
 
+  final String classId;
+
   final CollectionReference memoCollection = Firestore.instance.collection('memo');
 
-  Future<void> createMemo(String id, String title, String content) async {
-    return await memoCollection.document(id).setData({
+  Future<void> createMemo(String title, String content) async {
+    return await memoCollection.document().setData({
       'title' : title,
       'content' : content,
+      'timestamp': Timestamp.now(),
+      'classId' : uid,
     });
   }
 
   List<Memo> _memoListFromSnapshot(QuerySnapshot snapshot) {
-    
+    return snapshot.documents.map((doc) {
+      return Memo(
+        id: doc.documentID,
+        title: doc.data["title"],
+        content: doc.data["content"],
+        classId: doc.data["classId"]
+      );
+    }).toList();
   }
 
+  Stream<List<Memo>> get getMemo {
+    return memoCollection
+      .where("classId", isEqualTo: classId)
+      .snapshots()
+      .map(_memoListFromSnapshot);
+  }
 }

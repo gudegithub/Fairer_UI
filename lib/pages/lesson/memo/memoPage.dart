@@ -1,6 +1,10 @@
+import 'package:fairer_ui/models/memo.dart';
 import 'package:fairer_ui/pages/lesson/class_data.dart';
 import 'package:fairer_ui/pages/lesson/memo/memoAdd.dart';
+import 'package:fairer_ui/pages/lesson/memo/memoList.dart';
+import 'package:fairer_ui/service/database.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class MemoPage extends StatefulWidget {
 
@@ -59,26 +63,30 @@ class _MemoPageState extends State<MemoPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.data.className),
-        backgroundColor: _color,
-        /*actions: <Widget>[
-          IconButton(icon: Icon(Icons.edit), onPressed: (){
-              },)
-        ],*/
-        elevation: 0.0,
-      ),
-      floatingActionButton: FloatingActionButton(
-        child: Icon(
-            Icons.add
+    return StreamProvider<List<Memo>>.value(
+      value: DatabaseService(classId: widget.data.id).getMemo,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text(widget.data.className),
+          backgroundColor: _color,
+          /*actions: <Widget>[
+            IconButton(icon: Icon(Icons.edit), onPressed: (){
+                },)
+          ],*/
+          elevation: 0.0,
         ),
-        onPressed: ()async{
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => MemoAddPage(data: widget.data)),
-          );
-        }
+        floatingActionButton: FloatingActionButton(
+          child: Icon(
+              Icons.add
+          ),
+          onPressed: ()async{
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => MemoAddPage(data: widget.data)),
+            );
+          }
+        ),
+        body: MemoList(),
       ),
     );
   }

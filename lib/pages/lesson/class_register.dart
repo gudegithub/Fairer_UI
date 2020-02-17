@@ -102,7 +102,7 @@ class _ClassRegisterBodyState extends State<ClassRegisterBody> {
       return ListView.builder(
         itemCount: classList.length,
         itemBuilder: (context, index) {
-          return classTile(lesson: classList[index]);
+          return ClassTile(lesson: classList[index]);
         },
       );
     } else {

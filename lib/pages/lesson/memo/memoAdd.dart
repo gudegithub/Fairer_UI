@@ -5,9 +5,8 @@ import 'package:flutter/material.dart';
 class MemoAddPage extends StatefulWidget {
   
   ClassData data;
-  final DatabaseService database;
 
-  MemoAddPage({this.data, this.database});
+  MemoAddPage({this.data});
 
   @override
   _MemoAddPageState createState() => new _MemoAddPageState();
@@ -133,7 +132,7 @@ class _MemoAddPageState extends State<MemoAddPage> {
                     ),
                     onPressed: () {
                       if (_formKey.currentState.validate()) {
-                        widget.database.createMemo(widget.data.id, title, content);
+                        DatabaseService(uid: widget.data.id).createMemo(title, content);
                         Navigator.of(context).pop(data);
                       }
                     },
