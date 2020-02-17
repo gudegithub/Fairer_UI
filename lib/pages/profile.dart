@@ -60,8 +60,9 @@ class _ProfileState extends State<Profile> {
         title: new Text(
           'プロフィール',
           style: TextStyle(
-              color: Colors.black54, fontSize: 25, fontWeight: FontWeight.w800),
+              color: Colors.black54, fontSize: 25, fontWeight: FontWeight.w700),
         ),
+        iconTheme: new IconThemeData(color: Colors.black38),
       ),
       body: ListView(
         children: <Widget>[

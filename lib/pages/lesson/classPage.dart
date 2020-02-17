@@ -26,8 +26,8 @@ class ClassePage extends StatefulWidget{
   _ClassPageState createState() => _ClassPageState();
 }
 class _ClassPageState extends State<ClassePage>{
-  List<String> baseWeeks = ["Mon","Tue","Wed","Thu","Fri","Sat"];
-  List<String> baseTime = ["1st","2nd","3rd","4th","5th","6th","7th","8th"];
+  List<String> baseWeeks = ["月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"];
+  List<String> baseTime = ["１","2","3","4","5","6","7","8"];
   List<String> Classes =List.filled(25,'0,0,0,0');////25は5限,金曜日までの時間割//授業名、教室、教員、色
 
   final TextEditingController eCtrl = TextEditingController();

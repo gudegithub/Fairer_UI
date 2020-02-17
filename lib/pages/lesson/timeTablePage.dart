@@ -412,12 +412,17 @@ class _TableState extends State<Table> with RouteAware{
                                       )
                                     ),
                                     Container(
+                                      padding: EdgeInsets.only(bottom: 1,top: 1,right: 4, left: 4),
+                                      margin: EdgeInsets.only(bottom: 4),
                                       decoration: BoxDecoration(
                                         color: Colors.white,
                                         border: Border.all(color: Colors.white),
-                                        borderRadius: BorderRadius.circular(5)
+                                        borderRadius: BorderRadius.circular(10)
                                       ),
-                                    child:Text(map[index.toString()].roomName)
+                                      child:Text(
+                                        map[index.toString()].roomName,
+                                        style: TextStyle(fontSize: 12),
+                                      )
                                     ),
                                   ],
                                   ),

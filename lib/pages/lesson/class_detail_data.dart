@@ -1,4 +1,5 @@
 //授業の詳細ページ
+import 'package:fairer_ui/pages/lesson/memo/memoPage.dart';
 import 'package:flutter/material.dart';
 import 'class_data.dart';
 import 'package:path/path.dart' as path;
@@ -52,17 +53,8 @@ class _ClassDetailDateState extends State<ClassDetailDate> {
     }
     return reconvertedColor;
   }
-  List<String> baseWeeks = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
-  List<String> baseTime = [
-    "1st",
-    "2nd",
-    "3rd",
-    "4th",
-    "5th",
-    "6th",
-    "7th",
-    "8th"
-  ];
+   List<String> baseWeeks = ["月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"];
+  List<String> baseTime = ["１","2","3","4","5","6","7","8"];
   Color _color;
   Future<sqlite.Database> database;
   ClassData _classdata;
@@ -125,7 +117,7 @@ class _ClassDetailDateState extends State<ClassDetailDate> {
           baseWeeks[widget.data.week] +
               " " +
               baseTime[widget.data.time] +
-              " period",
+              "限目",
         ),
         backgroundColor: _color,
         /*actions: <Widget>[
@@ -213,7 +205,12 @@ class _ClassDetailDateState extends State<ClassDetailDate> {
               Container(
                 height: 50,
                 child: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => MemoPage(data: widget.data)),
+                    );
+                  },
                   child: Padding(
                     padding: EdgeInsets.only(left: 10, right: 10),
                     child: Row(

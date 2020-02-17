@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fairer_ui/models/classData.dart';
+import 'package:fairer_ui/models/memo.dart';
 import 'package:fairer_ui/models/user.dart';
-import 'package:flutter/material.dart';
+
 
 class DatabaseService {
   
@@ -98,5 +99,22 @@ class DatabaseService {
   }
 
   // 検索用のリストを取得
+
+
+
+  // Memo機能
+
+  final CollectionReference memoCollection = Firestore.instance.collection('memo');
+
+  Future<void> createMemo(String id, String title, String content) async {
+    return await memoCollection.document(id).setData({
+      'title' : title,
+      'content' : content,
+    });
+  }
+
+  List<Memo> _memoListFromSnapshot(QuerySnapshot snapshot) {
+    
+  }
 
 }

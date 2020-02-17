@@ -2,7 +2,11 @@ import 'articlePage.dart';
 import 'package:flutter/material.dart';
 
 class Article extends StatelessWidget {
-  const Article({Key key}) : super(key: key);
+  Article({this.uid});
+
+  final String uid;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +29,7 @@ class Article extends StatelessWidget {
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ArticlePage()),
+                  MaterialPageRoute(builder: (context) => ArticlePage(uid: uid)),
                 );
               },
             ),

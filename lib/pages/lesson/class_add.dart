@@ -140,8 +140,8 @@ class _ClassAddState extends State<ClassAdd> {
     ) ;
   }
 
-  List<String> baseWeeks = ["Mon","Tue","Wed","Thu","Fri","Sat"];
-  List<String> baseTime = ["1st","2nd","3rd","4th","5th","6th","7th","8th"];
+  List<String> baseWeeks = ["月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"];
+  List<String> baseTime = ["１","2","3","4","5","6","7","8"];
 
   Future<void> Insertclassdata(ClassData classDate) async {
     final sqlite.Database db = await database;
@@ -164,8 +164,11 @@ class _ClassAddState extends State<ClassAdd> {
       resizeToAvoidBottomPadding: true,
         appBar: AppBar(
           title: Text(
-            baseWeeks[widget.numberWeek]+" "+baseTime[widget.numberClass]+"period",
+            baseWeeks[widget.numberWeek]+" "+baseTime[widget.numberClass]+"限目",
+            style: TextStyle(color: Colors.black38),
           ),
+          backgroundColor: Colors.white,
+          iconTheme: new IconThemeData(color: Colors.black38),
         ),
         body: Form(
           key: _formKey,
@@ -220,7 +223,7 @@ class _ClassAddState extends State<ClassAdd> {
                 Padding(
                   padding: const EdgeInsets.symmetric(vertical: 16.0),
                   child: RaisedButton(
-                    color: Colors.lightBlue,
+                    color: Colors.blue,
                     // 送信ボタンクリック時の処理
                     onPressed: () async {
                       // バリデーションチェック

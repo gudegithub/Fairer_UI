@@ -150,8 +150,8 @@ class _ClassChangeState extends State<ClassChange> {
       version: 1,
     ) ;
   }
-  List<String> baseWeeks = ["Mon","Tue","Wed","Thu","Fri","Sat"];
-  List<String> baseTime = ["1st","2nd","3rd","4th","5th","6th","7th","8th"];
+  List<String> baseWeeks = ["月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"];
+  List<String> baseTime = ["１","2","3","4","5","6","7","8"];
   Future<void> Insertclassdata(ClassData classDate) async {
     final sqlite.Database db = await database;
     await db.insert(
@@ -205,7 +205,7 @@ class _ClassChangeState extends State<ClassChange> {
         appBar: AppBar(
           backgroundColor: stringifiedColorToColor(widget.beforeclassData.color),
           title: Text(
-            baseWeeks[widget.numberWeek]+" "+baseTime[widget.numberClass]+"period",
+            baseWeeks[widget.numberWeek]+" "+baseTime[widget.numberClass]+"限目",
           ),
         ),
         body: Form(

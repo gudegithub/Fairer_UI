@@ -1,6 +1,7 @@
 
 import 'package:fairer_ui/menu/side_menu.dart';
 import 'package:fairer_ui/models/user.dart';
+import 'package:fairer_ui/pages/calender/calender_base.dart';
 import 'package:fairer_ui/pages/media_pages/media_index.dart';
 import 'package:fairer_ui/service/auth.dart';
 import 'package:fairer_ui/service/database.dart';
@@ -17,21 +18,21 @@ class HomePage extends StatefulWidget {
 
 
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageState createState() => new _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedPage = 0;
+
   @override
   Widget build(BuildContext context) {
 
     final user = Provider.of<User>(context);
-    int _selectedPage = 0;
     final _pageOptions = [
       prefix0.Table(uid: user.uid),
-      MediaIndexPage(),
+      MediaIndexPage(uid: user.uid),
+      CalenderBase(),
     ];
-
-
 
 
     return StreamProvider<UserProfile>.value(

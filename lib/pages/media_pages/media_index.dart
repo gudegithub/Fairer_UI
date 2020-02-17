@@ -8,6 +8,11 @@ import 'article.dart';
 
 
 class MediaIndexPage extends StatelessWidget {
+
+  final String uid;
+
+  MediaIndexPage({this.uid});
+
   @override
 
   Widget build(BuildContext context) {
@@ -81,13 +86,14 @@ class MediaIndexPage extends StatelessWidget {
         padding: EdgeInsets.only(left: 30.0),
         child: SingleChildScrollView(
           child: Column(children: <Widget>[
-            Article(),
-            Article(),
-            Article(),
-            Article(),
-            Article(),
-            Article(),
-            Article(),
+            Article(uid: uid),
+            Article(uid: uid),
+            Article(uid: uid),
+            Article(uid: uid),
+            Article(uid: uid),
+            Article(uid: uid),
+            Article(uid: uid),
+            Article(uid: uid),
           ],)
         ),
       ),

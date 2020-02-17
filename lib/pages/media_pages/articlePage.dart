@@ -1,5 +1,9 @@
 
 
+import 'package:fairer_ui/models/user.dart';
+import 'package:fairer_ui/service/database.dart';
+import 'package:provider/provider.dart';
+
 import 'article.dart';
 import 'package:fairer_ui/menu/navigation_bar.dart';
 import 'package:flutter/material.dart';
@@ -7,25 +11,31 @@ import 'package:flutter/material.dart';
 import '../../menu/side_menu.dart';
 
 class ArticlePage extends StatelessWidget {
-  const ArticlePage({Key key}) : super(key: key);
+
+  final String uid;
+
+  ArticlePage({this.uid});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black38),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          color: Colors.black38,
-          onPressed: () {
-            Navigator.of(context).pop(true);
-          },
+    return StreamProvider<UserProfile>.value(
+      value: DatabaseService(uid: uid).userData,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          iconTheme: IconThemeData(color: Colors.black38),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            color: Colors.black38,
+            onPressed: () {
+              Navigator.of(context).pop(true);
+            },
+          ),
         ),
+        bottomNavigationBar: NavigationBar(),
+        endDrawer: SideDrawer(),
+        body: AriticleLayout()
       ),
-      bottomNavigationBar: NavigationBar(),
-      endDrawer: SideDrawer(),
-      body: AriticleLayout()
     );
   }
 }

@@ -39,7 +39,12 @@ class SideDrawer extends StatelessWidget {
                     leading: Icon(Icons.school),
                     title: Text("大学のリンク集"),
                     onTap: () async {
-  
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return linkDialog();
+                        }
+                      );
                     },
                   ),
                   ListTile(
@@ -130,7 +135,7 @@ class SideMenuHeader extends StatelessWidget {
             ),
             Flexible(
               child: Container(
-                padding: EdgeInsets.only(top: 10, left: 20),
+                padding: EdgeInsets.only(left: 50),
                 child: Column(
                   children: <Widget>[
                     Text("${userProfile.name}"),
