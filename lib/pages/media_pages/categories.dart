@@ -95,7 +95,6 @@ class _CategoriesState extends State<Categories> {
             },
           ),
         ),
-        endDrawer: new SideDrawer(auth: widget.auth, logoutCallback: widget.logoutCallback),
         body: ListView(
           children: <Widget>[
             topImg(),

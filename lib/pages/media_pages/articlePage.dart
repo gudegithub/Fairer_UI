@@ -36,7 +36,6 @@ class _ArticlePageState extends State<ArticlePage> {
           ),
         ),
         //bottomNavigationBar: BottomMenuBar(),
-        endDrawer: SideDrawer(auth: widget.auth, logoutCallback: widget.logoutCallback),
         body: ariticleLayout()
     );
   }
