@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     final user = Provider.of<User>(context);
     final _pageOptions = [
       prefix0.Table(uid: user.uid),
-      MediaIndexPage(uid: user.uid),
+      MediaIndexPage(userId: user.uid),
       CalenderBase(),
     ];
 

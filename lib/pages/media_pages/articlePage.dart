@@ -1,26 +1,29 @@
 
-
-import 'package:fairer_ui/models/user.dart';
-import 'package:fairer_ui/service/database.dart';
-import 'package:provider/provider.dart';
-
-import 'article.dart';
-import 'package:fairer_ui/menu/navigation_bar.dart';
+import 'package:fairer_ui/api/wpApi.dart';
+import 'package:fairer_ui/menu/side_menu.dart';
+import 'package:fairer_ui/pages/html_conv.dart';
+import 'package:fairer_ui/pages/media_pages/article.dart';
+import 'package:fairer_ui/service/auth.dart';
 import 'package:flutter/material.dart';
+import 'package:html/parser.dart' as parser;
+import 'package:flutter_html/flutter_html.dart';
 
-import '../../menu/side_menu.dart';
+class ArticlePage extends StatefulWidget {
+  const ArticlePage({Key key, this.articleData, this.auth, this.logoutCallback}) : super(key: key);
 
-class ArticlePage extends StatelessWidget {
+  final ArticleData articleData;
+  final BaseAuth auth;
+  final VoidCallback logoutCallback;
 
-  final String uid;
+  @override
+  State<StatefulWidget> createState() => new _ArticlePageState();
+}
 
-  ArticlePage({this.uid});
+class _ArticlePageState extends State<ArticlePage> {
 
   @override
   Widget build(BuildContext context) {
-    return StreamProvider<UserProfile>.value(
-      value: DatabaseService(uid: uid).userData,
-      child: Scaffold(
+    return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
           iconTheme: IconThemeData(color: Colors.black38),
@@ -32,110 +35,119 @@ class ArticlePage extends StatelessWidget {
             },
           ),
         ),
-        bottomNavigationBar: NavigationBar(),
-        endDrawer: SideDrawer(),
-        body: AriticleLayout()
-      ),
+        //bottomNavigationBar: BottomMenuBar(),
+        endDrawer: SideDrawer(auth: widget.auth, logoutCallback: widget.logoutCallback),
+        body: ariticleLayout()
     );
   }
-}
 
-class AriticleLayout extends StatelessWidget {
-  const AriticleLayout({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget ariticleLayout() {
     return SingleChildScrollView(
       child: Column(
         children: <Widget>[
-          MainImage(),
-          ArticleHeading(),
-          ArticleBody(),
+          mainImage(),
+          articleHeading(),
+          articleBody(),
           ArticleGood(),
           RelativeArticle(),
         ],
       ),
     );
   }
-}
 
-class MainImage extends StatelessWidget {
-  const MainImage({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget mainImage() {
     return Container(
       height: 250,
       child: Container(
-        decoration:
-        BoxDecoration( 
-          image: DecorationImage(
-            image: AssetImage("assets/image/thumbnail.png"),
-            fit: BoxFit.cover
-          )
-        )
+        child:FadeInImage.assetNetwork(
+            placeholder: 'assets/loading.gif',
+            image: widget.articleData.eyecatchUrl
+        ),//url
       ),
     );
   }
-}
 
+  Widget category(String category) {
+    if(category == "コラム") {
+      return Text("コラム", style: TextStyle(backgroundColor: Colors.blue));
+    } else if(category == "キャリア") {
+      return Text("キャリア", style: TextStyle(backgroundColor: Colors.limeAccent));
+    } else if(category == "ライフ") {
+      return Text("ライフ", style: TextStyle(backgroundColor: Colors.pinkAccent));
+    } else if(category == "海外") {
+      return Text("海外", style: TextStyle(backgroundColor: Colors.cyan));
+    }
+    return Text(category);
+  }
 
-
-
-class ArticleHeading extends StatelessWidget {
-  const ArticleHeading({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
+  Widget articleHeading() {
     return Container(
-      padding: EdgeInsets.only(top: 30.0, right: 40.0, left: 40.0, bottom: 20.0),
-      child: Column(
-        children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        padding: EdgeInsets.only(top: 30.0, right: 40.0, left: 40.0, bottom: 20.0),
+        child: Column(
+          children: <Widget>[
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                //Image.asset(
+                //  'assets/image/Column_budge.png',
+                //  width: 75,
+                //),
+                category(widget.articleData.category[0]),
+                Text(widget.articleData.date)//date
+              ],
+            ),
+            Container(
+                padding: EdgeInsets.only(top: 20.0),
+                child: Text(
+                    widget.articleData.title,//title
+                    style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold
+                    )
+                )
+            ),
+          ],
+        )
+    );
+  }
+
+  List<Widget> content(){
+    var data = parser.parse(widget.articleData.content).documentElement.getElementsByTagName("body");
+    List<Widget> html = new List();
+    if(data.length > 0) {
+      HtmlConv conv = new HtmlConv();
+      for(var v in data.toList()[0].children) {
+        if(v.getElementsByTagName("img").length > 0) {
+          html.add(conv.imgSrc(v.outerHtml));
+        } else {
+          html.add(Html(data: v.outerHtml));
+        }
+      }
+    }
+    return html;
+  }
+
+  Widget articleBody() {
+    return Container(
+        padding: EdgeInsets.only(right: 50.0, left: 50),
+        child: SingleChildScrollView(
+          child: Row(
             children: <Widget>[
-              Image.asset(
-                'assets/image/Column_budge.png',
-                width: 75,
+              Flexible(
+                child: Card(
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: content()
+                  ),
+                ),
               ),
-              Text(
-                "2019 12/21"
-              )
             ],
           ),
-          Container(
-            padding: EdgeInsets.only(top: 20.0),
-            child: Text(
-              "【2020年度最新版】日本でeスポーツ認定されているゲーム一覧",
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold
-              )
-            )
-          ),
-        ],
-      )
+        )
     );
   }
+
 }
-
-
-
-
-class ArticleBody extends StatelessWidget {
-  const ArticleBody({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(right: 50.0, left: 50),
-      child: Text("asdfasdfsdfssssssdfahdfhfdsdsfagssadfsadfasdfsadfasdfasdfasdfg"),
-    );
-  }
-}
-
-
-
 
 class ArticleGood extends StatefulWidget {
   ArticleGood({Key key}) : super(key: key);
@@ -166,55 +178,67 @@ class _ArticleGoodState extends State<ArticleGood> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(top: 20.0, right: 50.0, left:50.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: <Widget>[
-          IconButton(
-            icon: _heart ? 
-            Icon(Icons.favorite, color: Colors.pink,) : 
-            Icon(Icons.favorite_border, color: Colors.pink),
-            onPressed: () {
-              _heart ? _decrementCounter() : _incrementCounter();
-            },
-          ),
-          Row(
-            children: <Widget>[
-              Container(
-                padding: EdgeInsets.only(right: 10),
-                child: Text(
-                  "$_good",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                  )
+        padding: EdgeInsets.only(top: 20.0, right: 50.0, left:50.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: <Widget>[
+            IconButton(
+              icon: _heart ?
+              Icon(Icons.favorite, color: Colors.pink,) :
+              Icon(Icons.favorite_border, color: Colors.pink),
+              onPressed: () {
+                _heart ? _decrementCounter() : _incrementCounter();
+              },
+            ),
+            Row(
+              children: <Widget>[
+                Container(
+                  padding: EdgeInsets.only(right: 10),
+                  child: Text(
+                      "$_good",
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                      )
+                  ),
                 ),
-              ),
-              Text("いいね")
-            ],
-          )
-        ],
-      )
+                Text("いいね")
+              ],
+            )
+          ],
+        )
     );
   }
 }
 
-
-class RelativeArticle extends StatelessWidget {
-  const RelativeArticle({Key key}) : super(key: key);
+class RelativeArticle extends StatelessWidget{
+  WpData wpData = new WpData();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.only(right: 40.0, left: 40.0, bottom: 40.0),
-      child: Column(
-        children: <Widget>[
-          Article(),
-          Article(),
-          Article(),
-          Article(),
-          Article(),
-        ],
-      )
+      child: Container(
+        padding: EdgeInsets.only(left: 30.0),
+        child: FutureBuilder(
+          future: wpData.newArticlesGet(5),
+          builder: (context, snapshot){
+            if(snapshot.hasData) {
+              List<ArticleData> data = new List();
+              data = snapshot.data;
+              return
+                //SingleChildScrollView(
+                Column(
+                  children: List.generate(snapshot.data.length, (index){
+                    return new Article(articleData: data[index],);
+                  }),
+                  //   )
+                );
+            }
+            return Center(
+                child: CircularProgressIndicator()
+            );
+          },
+        ),
+      ),
     );
   }
 }

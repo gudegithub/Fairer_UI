@@ -20,7 +20,6 @@ class ClassRegister extends StatefulWidget{
   }):assert(numberClass !=null),
         assert(numberWeek != null);
   _ClassRegisterState createState() => _ClassRegisterState();
-
 }
 class _ClassRegisterState extends State<ClassRegister>{
   List<String> baseWeeks = ["月曜日","火曜日","水曜日","木曜日","金曜日","土曜日"];

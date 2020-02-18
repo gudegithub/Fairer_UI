@@ -1,12 +1,30 @@
-import 'articlePage.dart';
+
+import 'package:fairer_ui/api/wpApi.dart';
+import 'package:fairer_ui/pages/media_pages/articlePage.dart';
+import 'package:fairer_ui/service/auth.dart';
 import 'package:flutter/material.dart';
 
 class Article extends StatelessWidget {
-  Article({this.uid});
+  Article({Key key, this.auth, this.userId, this.logoutCallback, this.articleData})
+      : super(key: key);
 
-  final String uid;
+  final BaseAuth auth;
+  final String userId;
+  final VoidCallback logoutCallback;
+  final ArticleData articleData;
 
-
+  Widget category(String category) {
+    if(category == "コラム") {
+      return Text("コラム", style: TextStyle(backgroundColor: Colors.blue));
+    } else if(category == "キャリア") {
+      return Text("キャリア", style: TextStyle(backgroundColor: Colors.limeAccent));
+    } else if(category == "ライフ") {
+      return Text("ライフ", style: TextStyle(backgroundColor: Colors.pinkAccent));
+    } else if(category == "海外") {
+      return Text("海外", style: TextStyle(backgroundColor: Colors.cyan));
+    }
+    return Text(category);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,19 +35,19 @@ class Article extends StatelessWidget {
           children: <Widget>[
             GestureDetector(
               child: SizedBox(
-              width: 110,
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(20),
-                child: Image.asset(
-                  'assets/image/thumbnail.png',
-                  fit: BoxFit.cover,
-                  )
+                width: 110,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(20),
+                  child: FadeInImage.assetNetwork(
+                      placeholder: 'assets/loading.gif',
+                      image: this.articleData.eyecatchUrl
+                  ),//url
                 ),
               ),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => ArticlePage(uid: uid)),
+                  MaterialPageRoute(builder: (context) => ArticlePage(articleData: this.articleData)),
                 );
               },
             ),
@@ -40,34 +58,34 @@ class Article extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         Container(
-                          padding: EdgeInsets.only(left: 30.0, right: 30.0),
-                          child: Image.asset(
-                            'assets/image/Column_budge.png',
-                            width: 75,
-                          )
+                            padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                            child: category(this.articleData.category[0]),
                         ),
                         Text(
-                          "2019 8/20",
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold
-                          )
+                            this.articleData.date,
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold
+                            )
                         )
                       ],
                     ),
                   ),
                   GestureDetector(
                     child: Container(
-                      padding: EdgeInsets.only(top: 10.0,left: 30.0, right: 30.0),
-                      child: Text(
-                        '【2020年度最新版】日本でeスポーツ認定されているゲーム一覧',
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                      )
+                        padding: EdgeInsets.only(top: 10.0,left: 30.0, right: 30.0),
+                        child: Text(
+                          this.articleData.title,//title
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 2,
+                        )
                     ),
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => ArticlePage()),
+                        MaterialPageRoute(builder: (context) =>
+                        new ArticlePage(
+                          articleData: this.articleData,
+                        )),
                       );
                     },
                   )
