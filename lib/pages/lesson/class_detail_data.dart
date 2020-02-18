@@ -231,60 +231,60 @@ class _ClassDetailDateState extends State<ClassDetailDate> {
                   ),
                 ),
               ),
-              Divider(
-                color: Colors.grey,
-              ),
-              Container(
-                height: 50,
-                child: InkWell(
-                  onTap: () {},
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Icon(Icons.library_books),
-                            Padding(
-                              padding: EdgeInsets.only(left: 20),
-                              child: Text("シラバス"),
-                            )
-                          ],
-                        ),
-                        Icon(Icons.arrow_forward_ios)
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              Divider(
-                color: Colors.grey,
-              ),
-              Container(
-                height: 50,
-                child: InkWell(
-                  onTap: () {},
-                  child: Padding(
-                    padding: EdgeInsets.only(left: 10, right: 10),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Row(
-                          children: <Widget>[
-                            Icon(Icons.dialer_sip),
-                            Padding(
-                              padding: EdgeInsets.only(left: 20),
-                              child: Text("休講情報"),
-                            )
-                          ],
-                        ),
-                        Icon(Icons.arrow_forward_ios)
-                      ],
-                    ),
-                  ),
-                ),
-              ),
+              // Divider(
+              //   color: Colors.grey,
+              // ),
+              // Container(
+              //   height: 50,
+              //   child: InkWell(
+              //     onTap: () {},
+              //     child: Padding(
+              //       padding: EdgeInsets.only(left: 10, right: 10),
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //         children: <Widget>[
+              //           Row(
+              //             children: <Widget>[
+              //               Icon(Icons.library_books),
+              //               Padding(
+              //                 padding: EdgeInsets.only(left: 20),
+              //                 child: Text("シラバス"),
+              //               )
+              //             ],
+              //           ),
+              //           Icon(Icons.arrow_forward_ios)
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
+              // Divider(
+              //   color: Colors.grey,
+              // ),
+              // Container(
+              //   height: 50,
+              //   child: InkWell(
+              //     onTap: () {},
+              //     child: Padding(
+              //       padding: EdgeInsets.only(left: 10, right: 10),
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //         children: <Widget>[
+              //           Row(
+              //             children: <Widget>[
+              //               Icon(Icons.dialer_sip),
+              //               Padding(
+              //                 padding: EdgeInsets.only(left: 20),
+              //                 child: Text("休講情報"),
+              //               )
+              //             ],
+              //           ),
+              //           Icon(Icons.arrow_forward_ios)
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
               Container(
                 height: 40,
                 color: Colors.grey[300],
