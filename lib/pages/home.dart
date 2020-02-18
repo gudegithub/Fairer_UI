@@ -1,4 +1,3 @@
-
 import 'package:fairer_ui/menu/side_menu.dart';
 import 'package:fairer_ui/models/user.dart';
 import 'package:fairer_ui/pages/calender/calender_base.dart';
@@ -7,6 +6,8 @@ import 'package:fairer_ui/service/auth.dart';
 import 'package:fairer_ui/service/database.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../models/user.dart';
+import '../models/user.dart';
 import 'lesson/timeTablePage.dart' as prefix0;
 
 class HomePage extends StatefulWidget {
@@ -26,8 +27,11 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-
+    Provider<User>.value(
+      value: User(uid: widget.userId),
+    );
     final user = Provider.of<User>(context);
+
     final _pageOptions = [
       prefix0.Table(uid: user.uid),
       MediaIndexPage(userId: user.uid),
@@ -54,12 +58,12 @@ class _HomePageState extends State<HomePage> {
             },
             items: [
               BottomNavigationBarItem(
-                icon: Icon(Icons.description),
-                title: Text("メディア"),
-              ),
-              BottomNavigationBarItem(
                 icon: Icon(Icons.access_time),
                 title: Text("時間割"),
+              ),
+              BottomNavigationBarItem(
+                icon: Icon(Icons.description),
+                title: Text("メディア"),
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.calendar_today),

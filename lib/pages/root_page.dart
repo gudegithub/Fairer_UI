@@ -1,4 +1,3 @@
-
 import 'package:fairer_ui/models/user.dart';
 import 'package:fairer_ui/pages/home.dart';
 import 'package:fairer_ui/pages/profile.dart';
@@ -7,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'login_signup_page.dart';
 import '../service/auth.dart';
-
 
 enum AuthStatus {
   NOT_DETERMINED,

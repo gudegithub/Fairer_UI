@@ -134,12 +134,10 @@ class _ArticlePageState extends State<ArticlePage> {
           child: Row(
             children: <Widget>[
               Flexible(
-                child: Card(
                   child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: content()
                   ),
-                ),
               ),
             ],
           ),

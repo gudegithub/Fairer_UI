@@ -1,4 +1,3 @@
-
 import 'package:fairer_ui/api/wpApi.dart';
 import 'package:fairer_ui/pages/media_pages/articlePage.dart';
 import 'package:fairer_ui/service/auth.dart';
@@ -58,7 +57,7 @@ class Article extends StatelessWidget {
                     child: Row(
                       children: <Widget>[
                         Container(
-                            padding: EdgeInsets.only(left: 30.0, right: 30.0),
+                            padding: EdgeInsets.only(left: 10.0, right: 10.0),
                             child: category(this.articleData.category[0]),
                         ),
                         Text(

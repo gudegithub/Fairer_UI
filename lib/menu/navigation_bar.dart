@@ -11,12 +11,12 @@ class NavigationBar extends StatelessWidget {
         currentIndex: 0,
         items: [
           BottomNavigationBarItem(
-            icon: Icon(Icons.description),
-            title: Text("メディア"),
-          ),
-          BottomNavigationBarItem(
             icon: Icon(Icons.access_time),
             title: Text("時間割"),
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.description),
+            title: Text("メディア"),
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.calendar_today),
