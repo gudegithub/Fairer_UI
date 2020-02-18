@@ -29,18 +29,18 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     Provider<User>.value(
       value: User(uid: widget.userId),
+      child: prefix0.Table(),
     );
-    final user = Provider.of<User>(context);
 
     final _pageOptions = [
-      prefix0.Table(uid: user.uid),
-      MediaIndexPage(userId: user.uid),
+      prefix0.Table(uid: Provider.of<User>(context).uid),
+      MediaIndexPage(userId: Provider.of<User>(context).uid),
       CalenderBase(),
     ];
 
 
     return StreamProvider<UserProfile>.value(
-      value: DatabaseService(uid: user.uid).userData,
+      value: DatabaseService(uid: Provider.of<User>(context).uid).userData,
       child: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -51,10 +51,11 @@ class _HomePageState extends State<HomePage> {
           child: BottomNavigationBar(
             backgroundColor: Colors.white,
             currentIndex: _selectedPage,
-             onTap: (int index) {
-              setState(() {
+             onTap: (int index) => (){
+               setState(() {
                 _selectedPage = index;
               });
+               return Container();
             },
             items: [
               BottomNavigationBarItem(
@@ -78,4 +79,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
