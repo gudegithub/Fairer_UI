@@ -1,5 +1,0 @@
-version: "Apple Swift version 5.1.3 (swiftlang-1100.0.282.1 clang-1100.0.33.15)"
-options: "de01510c69b3acad750db7bb0ac1ab2b"
-build_time: [1582222915, 801379000]
-inputs:
-  "/Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Runner/AppDelegate.swift": [1582212350, 179723222]
