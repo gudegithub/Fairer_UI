@@ -1,0 +1,53 @@
+dependencies: \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/GTMAppAuth/Source/GTMAppAuthFetcherAuthorization.m \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/GTMAppAuth.build/module.modulemap \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/Target\ Support\ Files/GTMAppAuth/GTMAppAuth-prefix.pch \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/GTMAppAuth/Source/GTMAppAuthFetcherAuthorization.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/GTMSessionFetcher.build/module.modulemap \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/GTMSessionFetcher/Source/GTMReadMonitorInputStream.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/GTMSessionFetcher/Source/GTMMIMEDocument.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/GTMSessionFetcher/Source/GTMGatherInputStream.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/GTMSessionFetcher/Source/GTMSessionUploadFetcher.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/GTMSessionFetcher/Source/GTMSessionFetcherService.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/GTMSessionFetcher/Source/GTMSessionFetcherLogging.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/GTMSessionFetcher/Source/GTMSessionFetcher.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/Target\ Support\ Files/GTMSessionFetcher/GTMSessionFetcher-umbrella.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Build/Intermediates.noindex/Pods.build/Debug-iphonesimulator/AppAuth.build/module.modulemap \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/iOS/OIDExternalUserAgentCatalyst.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/iOS/OIDExternalUserAgentIOSCustomBrowser.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/iOS/OIDExternalUserAgentIOS.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/iOS/OIDAuthorizationService+IOS.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/iOS/OIDAuthState+IOS.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/AppAuth.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDURLQueryComponent.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDFieldMapping.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDDefines.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDClientMetadataParameters.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDEndSessionResponse.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDEndSessionRequest.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDURLSessionProvider.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDTokenUtilities.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDTokenResponse.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDTokenRequest.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDServiceDiscovery.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDServiceConfiguration.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDScopeUtilities.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDRegistrationResponse.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDRegistrationRequest.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDIDToken.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDGrantTypes.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDExternalUserAgentSession.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDExternalUserAgent.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDErrorUtilities.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDError.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDAuthorizationService.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDAuthorizationResponse.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDScopes.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDResponseTypes.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDExternalUserAgentRequest.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDAuthorizationRequest.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDAuthStateErrorDelegate.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDAuthStateChangeDelegate.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/OIDAuthState.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/AppAuth/Source/AppAuthCore.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/Target\ Support\ Files/AppAuth/AppAuth-umbrella.h

@@ -1,0 +1,41 @@
+dependencies: \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/src/cpp/common/secure_channel_arguments.cc \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/Target\ Support\ Files/gRPC-C++/gRPC-C++-prefix.pch \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpcpp/support/channel_arguments.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpcpp/support/channel_arguments_impl.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/compression.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/port_platform.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/compression_types.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/slice.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/support/port_platform.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/slice.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/gpr_slice.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/support/sync.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/gpr_types.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/sync.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/sync_generic.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/atm.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/atm_gcc_atomic.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/sync_posix.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/grpc.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/status.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/status.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/byte_buffer.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/byte_buffer.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/grpc_types.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/slice_buffer.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/connectivity_state.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/propagation_bits.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/support/time.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpcpp/resource_quota.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpcpp/resource_quota_impl.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpcpp/impl/codegen/config.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpcpp/impl/codegen/grpc_library.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpcpp/impl/codegen/core_codegen_interface.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/impl/codegen/byte_buffer_reader.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpcpp/impl/codegen/status.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpcpp/impl/codegen/status_code_enum.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpcpp/support/config.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/grpc_security.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/include/grpc/grpc_security_constants.h \
+  /Users/kensho_i/environment/flutter_projects/Fairer_UI/ios/Pods/gRPC-C++/src/core/lib/channel/channel_args.h

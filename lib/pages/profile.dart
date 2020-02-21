@@ -1,8 +1,9 @@
 import 'package:fairer_ui/service/database.dart';
 import 'package:flutter/material.dart';
 
-class Profile extends StatefulWidget {
+enum EditStatus { SIGNUP, EDIT }
 
+class Profile extends StatefulWidget {
   final String uid;
   final String name;
   final String university;
@@ -11,7 +12,7 @@ class Profile extends StatefulWidget {
   final bool isSignupForm;
 
   Profile({
-    @required this.uid,  
+    @required this.uid,
     @required this.isSignupForm,
     this.loginCallback,
     this.name,
@@ -33,6 +34,12 @@ class _ProfileState extends State<Profile> {
   String _selectedGakubu;
   String _name;
 
+  //登録ページか編集ページか
+  String _status;
+
+  //大学登録を表示するか、しないかの論理値
+  bool isUnivercitySelected;
+
   List<String> _dropdownValues = [
     "同志社大学",
     "立命館大学",
@@ -41,16 +48,24 @@ class _ProfileState extends State<Profile> {
   ]; //The list of values we want on the dropdown
 
   @override
-  Widget build(BuildContext context) {
-
-    if (!widget.isSignupForm) {
-      initState(){
-        _name = widget.name;
-        _currentlySelected = widget.university;
-        _selectedGakubu = widget.department;
-      }
+  void initState() {
+    //プロフィール登録ページ
+    if (widget.isSignupForm == true) {
+      isUnivercitySelected = false;
+      _status = "登録";
+      //プロフィール編集ページ
+    } else {
+      _name = widget.name;
+      _currentlySelected = widget.university;
+      _selectedGakubu = widget.department;
+      isUnivercitySelected = true;
+      _status = "編集";
     }
+    super.initState();
+  }
 
+  @override
+  Widget build(BuildContext context) {
     final userNameInputController = new TextEditingController();
     userNameInputController.text = _name;
 
@@ -58,7 +73,7 @@ class _ProfileState extends State<Profile> {
       appBar: new AppBar(
         backgroundColor: Colors.white,
         title: new Text(
-          'プロフィール',
+          "プロフィール${_status}",
           style: TextStyle(
               color: Colors.black54, fontSize: 25, fontWeight: FontWeight.w700),
         ),
@@ -92,7 +107,8 @@ class _ProfileState extends State<Profile> {
                           hintText: 'お名前を教えてください',
                           labelText: "ニックネーム",
                         ),
-                        validator: (value) => value.isEmpty ? 'ニックネームを入力してください' : null,
+                        validator: (value) =>
+                            value.isEmpty ? 'ニックネームを入力してください' : null,
                         onChanged: (value) {
                           //once dropdown changes, update the state of out currentValue
                           setState(() {
@@ -118,34 +134,8 @@ class _ProfileState extends State<Profile> {
                     Center(
                       child: Column(
                         children: <Widget>[
-                          Container(
-                            child: DropdownButton(
-                              hint: widget.isSignupForm ? Text("大学") : Text("${widget.university}"),
-
-                              //map each value from the lIst to our dropdownMenuItem widget
-                              items: _dropdownValues.map((value) {
-                                return DropdownMenuItem(
-                                  child: Text(value),
-                                  value: value,
-                                );
-                              }).toList(),
-                              value: _currentlySelected,
-                              onChanged: (value) {
-                                //once dropdown changes, update the state of out currentValue
-                                setState(() {
-                                  _currentlySelected = value;
-                                  print(_currentlySelected);
-                                  _setGakubu();
-                                  print(selectedUnivercityGakubu);
-                                });
-                              },
-                              //this wont make dropdown ex_panded and fill the horizontal space
-                              isExpanded: true,
-
-                              //make default value of dropdown the first value of our list
-                            ),
-                            width: 300,
-                          ),
+                          //大学情報の入力部分
+                          _selectUnivercityInputPart(),
                           Container(
                             child: Text('学部',
                                 style: TextStyle(
@@ -163,7 +153,9 @@ class _ProfileState extends State<Profile> {
                                   value: value,
                                 );
                               }).toList(),
-                              hint: widget.isSignupForm ? Text("学部") : Text("${widget.department}"),
+                              hint: widget.isSignupForm
+                                  ? Text("学部")
+                                  : Text("${widget.department}"),
                               value: _selectedGakubu,
                               onChanged: (String value) {
                                 //once dropdown changes, update the state of out currentValue
@@ -196,14 +188,20 @@ class _ProfileState extends State<Profile> {
                 style: TextStyle(color: Colors.white, fontSize: 20),
               ),
               onPressed: () {
-                if (_formKey.currentState.validate() && _currentlySelected != null && _selectedGakubu != null) {
-                  DatabaseService(uid: widget.uid).updateUserProfile(_name, _currentlySelected, _selectedGakubu);
+                if (_formKey.currentState.validate() &&
+                    _currentlySelected != null &&
+                    _selectedGakubu != null) {
+                  DatabaseService(uid: widget.uid).updateUserProfile(
+                      _name, _currentlySelected, _selectedGakubu);
                   if (widget.isSignupForm) {
                     widget.loginCallback();
                   } else {
                     Navigator.pop(context);
                   }
-                } 
+                } else {
+                  print(_currentlySelected);
+                  print(_selectedGakubu);
+                }
               },
             ),
           ),
@@ -282,6 +280,46 @@ class _ProfileState extends State<Profile> {
       ];
     } else {
       return selectedUnivercityGakubu = [];
+    }
+  }
+
+  Widget _selectUnivercityInputPart() {
+    //すでに大学の登録が終わっている場合
+    if (isUnivercitySelected == true) {
+      _currentlySelected = widget.university;
+      _setGakubu();
+      return Text("${widget.university}");
+
+      //大学を登録するこれから場合
+    } else {
+      return Container(
+        child: DropdownButton(
+          hint: widget.isSignupForm ? Text("大学") : Text("${widget.university}"),
+
+          //map each value from the lIst to our dropdownMenuItem widget
+          items: _dropdownValues.map((value) {
+            return DropdownMenuItem(
+              child: Text(value),
+              value: value,
+            );
+          }).toList(),
+          value: _currentlySelected,
+          onChanged: (value) {
+            //once dropdown changes, update the state of out currentValue
+            setState(() {
+              _currentlySelected = value;
+              print(_currentlySelected);
+              _setGakubu();
+              print(selectedUnivercityGakubu);
+            });
+          },
+          //this wont make dropdown ex_panded and fill the horizontal space
+          isExpanded: true,
+
+          //make default value of dropdown the first value of our list
+        ),
+        width: 300,
+      );
     }
   }
 }
