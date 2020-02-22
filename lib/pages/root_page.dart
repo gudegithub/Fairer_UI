@@ -85,6 +85,14 @@ class _RootPageState extends State<RootPage> {
 
   @override
   Widget build(BuildContext context) {
+
+    var screenWidth = MediaQuery.of(context).size.width;
+    var screenHeight = MediaQuery.of(context).size.height;
+
+    //コンソールに画面幅を表示
+    print("横幅のピクセル: $screenWidth");
+    print("縦幅のピクセル: $screenHeight");
+
     switch (authStatus) {
       case AuthStatus.NOT_DETERMINED:
         return buildWaitingScreen();
